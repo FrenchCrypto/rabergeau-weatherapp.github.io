@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 12vh 100px;
+    font-family: 'Source Sans Pro', arial, sans-serif;
+    font-weight: 300;
+    color: #333;
+    box-sizing: border-box;
+}
+.timeline {
+    width:100%;
+    max-width:800px;
+    background:#fff;
+    padding: 100px 50px;
+    position: relative;
+    border-radius: 10px;
+}
+img {
+    width:100px;
+    height:100px;
+    padding: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sidebar {
+    height: 111.5%;
+}
