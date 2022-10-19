@@ -19,3 +19,19 @@ body {
     position: relative;
     border-radius: 10px;
 }
+.sidebar {
+    height: 106.25%;
+}
+img {
+    width:100px;
+    height:100px;
+    padding: 5px;
+}
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 33.33%;
+    padding: 5px;
+}

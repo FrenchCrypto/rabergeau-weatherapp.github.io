@@ -1,0 +1,9 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Source Sans Pro', arial, sans-serif;
+    font-size: 32px;
+    color: #084360;
+}
