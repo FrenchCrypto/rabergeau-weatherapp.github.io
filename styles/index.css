@@ -7,3 +7,12 @@ body {
     font-size: 32px;
     color: #084360;
 }
+video  {
+    width: 30%;
+    height: 30%;
+    object-fit: cover;
+    position: fixed;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+}

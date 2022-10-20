@@ -7,7 +7,7 @@
 }
 body {
     font-family: 'Roboto', sans-serif;
-    background-image: url('background.jpg');
+    background-image: url('../images/background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -41,7 +41,7 @@ body {
     border-top: 1px solid rgba(255,255,255,.1);
     transition: .4s;
 }
-ul li:hover a{
+.sidebar ul li:hover a{
     padding-left: 50px;
 }
 .sidebar ul a i{
