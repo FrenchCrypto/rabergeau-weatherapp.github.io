@@ -1,18 +1,14 @@
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
     font-family: 'Source Sans Pro', arial, sans-serif;
     font-size: 32px;
     color: #084360;
 }
 video  {
-    width: 30%;
-    height: 30%;
-    object-fit: cover;
-    position: fixed;
-    margin: auto;
-    padding: 0;
-    overflow: hidden;
+    width: 40%;
+    height: 40%;
+    margin: 0 auto;
+    display: block;
+}
+h1 {
+    text-align: center;
 }
