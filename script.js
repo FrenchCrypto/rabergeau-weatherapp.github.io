@@ -7,6 +7,29 @@ const searchForm = document.getElementById('search-form');
 const cityInput = document.getElementById('city-input');
 const weatherResults = document.getElementById('weather-results');
 
+async function fetchJson(url) {
+  const response = await fetch(url);
+  return await response.json();
+}
+
+function createElement(tag, attributes = {}, children = []) {
+  const element = document.createElement(tag);
+
+  for (const [key, value] of Object.entries(attributes)) {
+    element.setAttribute(key, value);
+  }
+
+  children.forEach(child => {
+    if (typeof child === 'string') {
+      element.appendChild(document.createTextNode(child));
+    } else {
+      element.appendChild(child);
+    }
+  });
+
+  return element;
+}
+
 searchForm.addEventListener('submit', async (event) => {
   event.preventDefault(); // prevent form submission
 
@@ -19,8 +42,7 @@ searchForm.addEventListener('submit', async (event) => {
 
   try {
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-    const weatherResponse = await fetch(weatherUrl);
-    const weatherData = await weatherResponse.json();
+    const weatherData = await fetchJson(weatherUrl);
 
     const { coord: { lat, lon }, main: { temp, humidity }, weather, wind: { speed } } = weatherData;
     const { description, icon } = weather[0];
@@ -46,8 +68,7 @@ searchForm.addEventListener('submit', async (event) => {
 async function setCityImage(city) {
   try {
     const unsplashUrl = `https://api.unsplash.com/search/photos?query=${city}&client_id=${unsplashApiKey}`;
-    const unsplashResponse = await fetch(unsplashUrl);
-    const unsplashData = await unsplashResponse.json();
+    const unsplashData = await fetchJson(unsplashUrl);
 
     if (unsplashData.results && unsplashData.results.length > 0) {
       const imageUrl = unsplashData.results[0].urls.regular;
@@ -64,62 +85,44 @@ async function setCityImage(city) {
     console.log(error);
     document.body.style.backgroundImage = '';
   }
-}
-
-async function fetchPointForecast(lat, lon) {
-  try {
-    const windyPointUrl = `https://api.windy.com/point-forecast/v2?lat=${lat}&lon=${lon}&key=${windyPointAPIKey}`;
-    const pointResponse = await fetch(windyPointUrl);
-    const pointData = await pointResponse.json();
-
-    // Display point forecast data as needed
-    console.log(pointData);
-  } catch (error) {
-    console.log(error);
   }
-}
-
-async function fetchWebcams(lat, lon) {
+  
+  async function fetchPointForecast(lat, lon) {
+  try {
+  const windyPointUrl = `https://api.windy.com/point-forecast/v2?lat=${lat}&lon=${lon}&key=${windyPointAPIKey}`;
+  const pointData = await fetchJson(windyPointUrl);
+  // Display point forecast data as needed
+console.log(pointData);
+} catch (error) {
+  console.log(error);
+  }
+  }
+  
+  async function fetchWebcams(lat, lon) {
   try {
   const webcamsUrl = `https://api.windy.com/api/webcams/v2/list/nearby=${lat},${lon},50/category=city?show=webcams:image,location,title,url&key=${windyWebcamsAPIKey}`;
-  const webcamsResponse = await fetch(webcamsUrl);
-  const webcamsData = await webcamsResponse.json();
+  const webcamsData = await fetchJson(webcamsUrl);
   // Remove existing webcams container if present
 const existingWebcamsContainer = document.getElementById('webcams-container');
 if (existingWebcamsContainer) {
   existingWebcamsContainer.remove();
 }
 
-const webcamsContainer = document.createElement('div');
-webcamsContainer.setAttribute('id', 'webcams-container');
-
-const webcamsTitle = document.createElement('h2');
-webcamsTitle.textContent = 'Webcams';
-webcamsContainer.appendChild(webcamsTitle);
+const webcamsContainer = createElement('div', { id: 'webcams-container' }, [
+  createElement('h2', {}, ['Webcams'])
+]);
 
 if (webcamsData.result && webcamsData.result.webcams.length > 0) {
   webcamsData.result.webcams.forEach(webcam => {
-    const webcamDiv = document.createElement('div');
-    webcamDiv.classList.add('webcam');
-
-    const webcamImage = document.createElement('img');
-    webcamImage.src = webcam.image.current.preview;
-    webcamImage.alt = `${webcam.title} - ${webcam.location.city}`;
-    webcamDiv.appendChild(webcamImage);
-
-    const webcamLink = document.createElement('a');
-    webcamLink.href = webcam.url.current.desktop;
-    webcamLink.textContent = 'View live feed';
-    webcamLink.target = '_blank';
-    webcamLink.rel = 'noopener noreferrer';
-    webcamDiv.appendChild(webcamLink);
+    const webcamDiv = createElement('div', { class: 'webcam' }, [
+      createElement('img', { src: webcam.image.current.preview, alt: `${webcam.title} - ${webcam.location.city}` }),
+      createElement('a', { href: webcam.url.current.desktop, target: '_blank', rel: 'noopener noreferrer' }, ['View live feed'])
+    ]);
 
     webcamsContainer.appendChild(webcamDiv);
   });
 } else {
-  const noWebcamsMessage = document.createElement('p');
-  noWebcamsMessage.textContent = 'No webcams available for this city.';
-  webcamsContainer.appendChild(noWebcamsMessage);
+  webcamsContainer.appendChild(createElement('p', {}, ['No webcams available for this city.']));
 }
 
 document.body.appendChild(webcamsContainer);
@@ -127,4 +130,3 @@ document.body.appendChild(webcamsContainer);
   console.log(error);
   }
   }
-
