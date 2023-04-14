@@ -4,14 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather App</title>
-  <link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
-/>
-<script
-  src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-></script>
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
@@ -19,16 +13,13 @@
 <body>
   <div class="container">
     <h1>Weather App</h1>
-
-    <form id="search-form" class="fade-in">
+    <form id="search-form">
       <label for="city-input">Enter a city:</label>
       <input type="text" id="city-input" required>
       <button type="submit" id="search-button">Search</button>
     </form>
-
-    <div id="weather-results" class="fade-in"></div>
-
-    </div>
+    <div id="weather-results"></div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
