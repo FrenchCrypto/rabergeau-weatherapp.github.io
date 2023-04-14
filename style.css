@@ -15,7 +15,6 @@ body {
 }
 
 .container {
-  text-align: center;
   max-width: 500px;
   padding: 30px;
   background-color: rgba(0, 0, 0, 0.6);
@@ -29,16 +28,12 @@ h1 {
   margin-bottom: 30px;
 }
 
-form {
-  margin-bottom: 20px;
-}
-
-form label {
+label {
   display: block;
   margin-bottom: 5px;
 }
 
-form input[type="text"] {
+input[type="text"] {
   padding: 10px;
   width: 100%;
   font-size: 1rem;
@@ -48,7 +43,7 @@ form input[type="text"] {
   margin-bottom: 15px;
 }
 
-form button[type="submit"] {
+button[type="submit"] {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -59,7 +54,7 @@ form button[type="submit"] {
   transition: background-color 0.3s;
 }
 
-form button[type="submit"]:hover {
+button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
@@ -71,9 +66,7 @@ form button[type="submit"]:hover {
   margin-top: 20px;
   font-size: 1.5rem;
 }
-#search-form {
-  margin-left: -20px;
-}
+
 .fade-in {
   animation: fadeIn 1s ease-in;
 }
@@ -86,10 +79,13 @@ form button[type="submit"]:hover {
     opacity: 1;
   }
 }
+
 #webcams-container {
   margin-top: 20px;
 }
-
+#search-form {
+  margin-left: -20px;
+}
 .webcam {
   display: inline-block;
   margin: 10px;
